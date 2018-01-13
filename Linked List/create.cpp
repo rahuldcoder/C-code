@@ -60,19 +60,37 @@ class LinkedList{
         while(temp->data!=nodeValue && temp->next!=NULL)
         {                         
             temp=temp->next;        
-        }
-    
-
+        }    
             node *tempNode =new node;
             tempNode->data=afterValue;
             tempNode->next=temp->next;
             temp->next=tempNode;
 
-       
+    }
 
+    bool deleteNode(int value)
+    {
+        node *temp1=header;
+        node *temp2;
+        while(temp1->next!=NULL && temp1->data!=value)
+        {   temp2=temp1;
+            temp1=temp1->next;
+        }
+        if(temp1->data==value)
+        {
+            temp2->next=temp1->next;
+            delete temp1;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
 
     }
+
+
 
     void printList()
     {   node * temp=header;
@@ -90,13 +108,14 @@ class LinkedList{
 
 
 int main()
-{
+{   bool isdeleted;
     LinkedList firstList;
     firstList.addNodeAtBack(5);
     firstList.addNodeAtBack(6);
     firstList.addNodeAtFront(0);
     firstList.addNodeAtFront(10);
-    firstList.addNodeAfterValue(0,100);
-
+    firstList.addNodeAfterValue(0,100); 
     firstList.printList();
+
+   
 }
