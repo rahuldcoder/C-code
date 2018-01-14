@@ -146,8 +146,32 @@ class LinkedList{
             temp=temp->next;
         }    
     }
+    
+    bool searchForNode(int value)  
+    {
+        node * temp=header;
+        if(header->next==NULL)
+        {
+            return false;
+        }
+        else
+        {
+            temp=temp->next;
+            while(temp->data!=value && temp->next!=NULL)
+            {
+                temp=temp->next;
 
-
+            }
+            if(temp->data==value)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 };
 
 
@@ -160,7 +184,7 @@ int main()
     firstList.addNodeAtFront(0);
     firstList.addNodeAtFront(10);
     firstList.addNodeAfterValue(0,100); 
-    cout<<firstList.getNodeCountRecursive(firstList.getHeader());
+    cout<<firstList.searchForNode(90)<<endl;
   //  cout<<"Count Nodes: "<<firstList.getNodeCountIterative()<<endl;
     //firstList.printList();
 
