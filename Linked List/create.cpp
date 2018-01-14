@@ -19,6 +19,12 @@ class LinkedList{
        header->data=-1;
        header->next=NULL;
     }
+
+    node * getHeader()
+    {
+        return header;
+    }
+
     void addNodeAtBack(int value){
         if(header->next==NULL )
         {
@@ -116,6 +122,20 @@ class LinkedList{
 
 
     }
+    int getNodeCountRecursive(node * temp)
+    {   int count;
+        if(temp->next!=NULL)
+        {
+            count=getNodeCountRecursive(temp->next)+1;
+            return count;
+        }
+        else
+        {
+            return 1;
+        }
+
+
+    }
 
     void printList()
     {   node * temp=header;
@@ -140,6 +160,7 @@ int main()
     firstList.addNodeAtFront(0);
     firstList.addNodeAtFront(10);
     firstList.addNodeAfterValue(0,100); 
+    cout<<firstList.getNodeCountRecursive(firstList.getHeader());
   //  cout<<"Count Nodes: "<<firstList.getNodeCountIterative()<<endl;
     //firstList.printList();
 
