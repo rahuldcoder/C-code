@@ -90,7 +90,32 @@ class LinkedList{
 
     }
 
+    int getNodeCountIterative()
+    {   
+        int counter = 0;
 
+
+
+        if (header->next != NULL)
+        {
+            node *temp = header->next;
+           
+            while (temp != NULL)
+            {
+                temp = temp->next;
+                counter++;
+            }
+        
+        }
+        else
+        {
+            return counter;
+        }
+
+        return counter;
+
+
+    }
 
     void printList()
     {   node * temp=header;
@@ -115,7 +140,8 @@ int main()
     firstList.addNodeAtFront(0);
     firstList.addNodeAtFront(10);
     firstList.addNodeAfterValue(0,100); 
-    firstList.printList();
+  //  cout<<"Count Nodes: "<<firstList.getNodeCountIterative()<<endl;
+    //firstList.printList();
 
    
 }
