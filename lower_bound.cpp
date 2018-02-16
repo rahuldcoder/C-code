@@ -21,6 +21,7 @@ int lowerBound(int arr[], int n, int key)
             high = mid - 1;
         }
     }
+    return ans;
 }
 
 int main()
