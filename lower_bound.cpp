@@ -27,5 +27,5 @@ int lowerBound(int arr[], int n, int key)
 int main()
 {
     int arr[10] = {1, 2, 3, 3, 3, 3, 3, 4, 4, 5};
-    cout << lowerBound(arr, 10, 3) << endl;
+    cout << lowerBound(arr, 10, 9) << endl;
 }
