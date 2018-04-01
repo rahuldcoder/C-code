@@ -1,53 +1,73 @@
- #include<bits/stdc++.h>
- using namespace std;
- 
- void merge(int A[ ] , int start, int mid, int end) {
- //stores the starting position of both parts in temporary variables.
-int p = start ,q = mid+1;
+#include<bits/stdc++.h>
+using namespace std;
 
-int Arr[end-start+1] , k=0;
+void merge(int arr[],int low,int mid,int end)
+{
+    int lenLeft=mid-low+1;
+    int lenRight=end-mid;
+    int left[lenLeft],right[lenRight];
 
-for(int i = start ;i <= end ;i++) {
-    if(p > mid)      //checks if first part comes to an end or not .
-       Arr[ k++ ] = A[ q++] ;
+    for(int i=0;i<lenLeft;i++)
+    {
+        left[i]=arr[low+i];
+    }
+    for(int i=0;i<lenRight;i++)
+    {
+        right[i]=arr[mid+1+i];
+    }
 
-   else if ( q > end)   //checks if second part comes to an end or not
-       Arr[ k++ ] = A[ p++ ];
+    int i=0,j=0,k=low;
 
-   else if( A[ p ] < A[ q ])     //checks which part has smaller element.
-      Arr[ k++ ] = A[ p++ ];
+    while(i<lenLeft&&j<lenRight)
+    {
+        if(left[i]<=right[j])
+        {
+            arr[k]=left[i];
+            i++;
+        }
+        else
+        {
+            arr[k]=right[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<lenLeft)
+    {
+        arr[k++]=left[i++];
+    }
+    while(j<lenRight)
+    {
+        arr[k++]=right[j++];
+    }
 
-   else
-      Arr[ k++ ] = A[ q++];
- }
-  for (int p=0 ; p< k ;p ++) {
-   /* Now the real array has elements in sorted manner including both 
-        parts.*/
-     A[ start++ ] = Arr[ p ] ;                          
-  }
+
 }
-                    
 
- void merge_sort (int A[ ] , int start , int end )
-   {
-           if( start < end ) {
-           int mid = (start + end ) / 2 ;           // defines the current array in 2 parts .
-           merge_sort (A, start , mid ) ;                 // sort the 1st part of array .
-           merge_sort (A,mid+1 , end ) ;              // sort the 2nd part of array.
+void mergeSort(int arr[],int low,int end)
+{
+    if(low<end)
+    {
+        int mid=(low+end)/2;
 
-         // merge the both parts by comparing elements of both the parts.
-          merge(A,start , mid , end );   
-   }  
+        mergeSort(arr,low,mid);
+        mergeSort(arr,mid+1,end);
+        merge(arr,low,mid,end);
+    }
+
+}
+
 
 int main()
 {
-    int size=5;
-    int arr[5]={5,4,3,2,1};
-     for (int i=0;i<size;i++)
-    cout<<arr[i]<<endl;
-    merge_Sort(arr,0,size-1);
-    for (int i=0;i<size;i++)
-    cout<<arr[i]<<endl;
+    int arr[]={10,9,8,7,6,5,4,3,2,1};
+    mergeSort(arr,0,9);
+    for(int i=0;i<10;i++)
+    cout<<arr[i]<<" ";
+    cout<<endl;
+
+
+
 
 
 }
