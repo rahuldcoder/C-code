@@ -1,50 +1,73 @@
 #include<bits/stdc++.h>
 using namespace std;
-void merge(int arr[],int beg,int mid ,int end)
+
+void merge(int arr[],int low,int mid,int end)
 {
-    int Arr[end-beg+1],p=beg,q=mid+1,k=0;
-    
-    for(int i=beg;i<=end;i++)
+    int lenLeft=mid-low+1;
+    int lenRight=end-mid;
+    int left[lenLeft],right[lenRight];
+
+    for(int i=0;i<lenLeft;i++)
     {
-        if(p>mid)
+        left[i]=arr[low+i];
+    }
+    for(int i=0;i<lenRight;i++)
+    {
+        right[i]=arr[mid+1+i];
+    }
+
+    int i=0,j=0,k=low;
+
+    while(i<lenLeft&&j<lenRight)
+    {
+        if(left[i]<=right[j])
         {
-            Arr[k++]=arr[q++];
+            arr[k]=left[i];
+            i++;
         }
-        else if(q>end)
-        {
-            Arr[k++]=arr[p++];
-        }
-        else if(arr[p]>=arr[q])
-        Arr[k++]=arr[q++];
         else
-        Arr[k++]=arr[p++];
+        {
+            arr[k]=right[j];
+            j++;
+        }
+        k++;
     }
-    for(int i=0;i<end-beg+1;i++)
-    arr[beg++]=Arr[i];
-
-
-
-}
-void mergeSort(int arr[],int beg,int end)
-{
-    if(beg<end)
+    while(i<lenLeft)
     {
-        int mid=beg+(end-beg)/2;
-        mergeSort(arr,beg,mid);
+        arr[k++]=left[i++];
+    }
+    while(j<lenRight)
+    {
+        arr[k++]=right[j++];
+    }
+
+
+}
+
+void mergeSort(int arr[],int low,int end)
+{
+    if(low<end)
+    {
+        int mid=(low+end)/2;
+
+        mergeSort(arr,low,mid);
         mergeSort(arr,mid+1,end);
-        merge(arr,beg,mid,end);
+        merge(arr,low,mid,end);
     }
 
 }
+
+
 int main()
 {
-    int size=5;
-    int arr[5]={5,4,3,2,1};
-     for (int i=0;i<size;i++)
-    cout<<arr[i]<<endl;
-    mergeSort(arr,0,size-1);
-    for (int i=0;i<size;i++)
-    cout<<arr[i]<<endl;
+    int arr[]={10,9,8,7,6,5,4,3,2,1};
+    mergeSort(arr,0,9);
+    for(int i=0;i<10;i++)
+    cout<<arr[i]<<" ";
+    cout<<endl;
+
+
+
 
 
 }
