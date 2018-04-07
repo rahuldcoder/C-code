@@ -1,51 +1,54 @@
 #include<bits/stdc++.h>
 using namespace std;
-# define MAX 100
-void max_heapify(int a[],int i,int n){
- int L,R,largest;
- L=2*i;
- R=2*i+1;
- if(L<=n && a[L]>a[i])
- largest=L;
- else
- largest=i;
- if(R<=n && a[R]>a[largest])
- largest=R;
- if(largest!=i)
- {
-   int temp=a[largest];
-   a[largest]=a[i];
-   a[i]=temp;
-  max_heapify(a,largest,n);
- }
 
-}
-void build_heap(int a[],int n){
-for(int i=n/2;i>=1;i--){
- max_heapify(a,i,n);
-}}
-
-void heap_sort(int a[],int n){
-build_heap(a,n);
-for(int i=n;i>=2;i--){
- int temp=a[1];
- a[1]=a[n];
- a[n]=temp;
- n--;
- max_heapify(a,1,n);
+void swap(int arr[],int i,int j)
+{
+  int temp=arr[i];
+  arr[i]=arr[j];
+  arr[j]=temp;
 
 }
 
+void max_heapify(int arr[],int N,int index)
+{
+  int leftChild=2*index+1;
+  int rightChild=2*index+2;
+
+  int largest=index;
+
+  if(leftChild<N && arr[leftChild]>arr[largest])
+  {
+    largest=leftChild;
+  }
+  if(rightChild <N && arr[rightChild]>arr[largest])
+  {
+    largest=rightChild;
+  }
+
+  if(largest!=index)
+  {
+    swap(arr,largest,index);
+    max_heapify(arr,N,largest);
+  }
+
+
 }
 
+void buildHeap(int arr[],int N)
+{
+  for(int i=N/2-1;i>=0;i--)
+  {
+    max_heapify(arr,N,i);
+  }
+
+}
 
 int main(){
-  int n, arr[MAX];
-  cout<<"Enter the size of the array "<<endl;
-  cin>>n;
-  for(int i=1;i<=n;i++)
-  cin>>arr[i];
-  heap_sort(arr,n);
-  for(int i=1;i<=n;i++)
-  cout<<arr[i]<<" ";
+
+  int arr[]={11,2,33,4,5};
+  buildHeap(arr,5);
+  for(int i=0;i<5;i++)
+  {
+    cout<<arr[i]<<" ";
+  }
 }
